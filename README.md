@@ -15,7 +15,8 @@ I undertook a personal challenge to style the application using only the Bootstr
 6. Sqlite3 Library in Python
 7. Exception Handling in Flask
 8. Server-side Session in Flask
-9. Security in Flask (Password Hash)
+9. Password Hash
+10. Virtual environments in Python
 
 
 ## Installation
