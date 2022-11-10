@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign {{ verb }}
+{% endblock %}
+
+{% block main %}
+    <div class="card col-md-6 mx-auto">
+        <div class="card-body">
+            <form action="/{{ 'sign'+alt }}">
+                <button type="submit" class="float-right btn btn-outline-primary">Sign {{ alt }}</button>
+            </form>
+            <h4 class="card-title mb-4 mt-1">Sign {{ verb }} &#128521;</h4>
+            <form action="/{{ 'sign'+verb }}" method="post">
+                <div class="form-group">
+                    <input class="form-control" placeholder="Username" autocomplete="off" type="text" name="username" required>
+                </div>
+                {% if verb == "up" %}
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Email" autocomplete="off" type="email" name="email" required>
+                    </div>
+                {% endif %}
+                <div class="form-group d-flex align-items-center">
+                    <input id="pswrd" class="form-control mr-3" placeholder="Password" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$" title="Strong password with atleast 1 lowercase character, 1 uppercase character, 1 number and 8 total characters" required>
+                    <i class="fas fa-solid fa-eye-slash"></i>
+                </div>
+                {% if verb == "up" %}
+                    <div class="form-group d-flex align-items-center">
+                        <input id="pswrd-confirm" class="form-control mr-3" placeholder="Password Confirmation" type="password" name="confirmation" required>
+                        <i class="fas fa-solid fa-eye-slash"></i>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Sign {{ verb }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

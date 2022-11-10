@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Ideas
+{% endblock %}
+
+{% block main %}
+	{% if ideas|count != 0 %}
+		<h3 class="text-white mb-3">Ideas</h3>
+		{% for i in range(ideas|length) %}
+			<div class="card bg-white mx-auto mb-2">
+				<div class="card-body">
+					<h5 class="card-title font-weight-bold" role="button" data-toggle="collapse" data-target="#idea-content-{{ i }}" aria-expanded="false" aria-controls="idea-content">
+						{{ ideas[i].idea_name }} <i class="fas fa-angle-down fa-lg float-right"></i>
+					</h5>
+					<div class="collapse" id="idea-content-{{ i }}">
+						<p class="card-text mb-1">Created:- {{ ideas[i].create_date|date_format }}</h6>
+						{% if ideas[i].posted %}
+							<p class="card-text mb-1">Posted:- {{ ideas[i].post_date|date_format }}</p>
+						{% endif %}
+						<p class="card-text">{{ ideas[i].idea_body }}</p>
+						<form class="form-inline">
+							<button type="submit" class="btn btn-danger mr-2" formaction="/delete" name="id" value="{{ ideas[i].id }}">Delete</button>
+							{% if ideas[i].posted %}
+								<button type="submit" class="btn btn-success" formaction="/unpost" name="id" value="{{ ideas[i].id }}">Undo post</button>
+							{% else %}
+								<button type="submit" class="btn btn-success" formaction="/post" name="id" value="{{ ideas[i].id }}">Post</button>
+							{% endif %}
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% else %}
+		{{ macro.empty("you do not have any ideas here currently", "create", "create some") }}
+	{% endif %}
+{% endblock %}

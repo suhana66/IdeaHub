@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User Notifications
+{% endblock %}
+
+{% block main %}
+    {% if notifs|count != 0 %}
+        <h3 class="text-white mb-3">Notifications</h3>
+        {% for notif in notifs %}
+			<div class="card bg-white mx-auto mb-2">
+				<div class="card-body">
+					{% if "like_date" in notif %}
+						<h5 class="card-title d-inline"><a class="text-dark" href="/profile/notif.user_id">{{ notif.username }}</a> <span class="font-weight-normal">liked your idea</span> <a class="text-dark" href="/ideas">{{ notif.idea_name }}</a></h5>
+						<p class="card-text float-right d-inline">{{ notif.like_date|date_format("short") }}</p>
+					{% else %}
+						<h5 class="card-title d-inline"><a class="text-dark" href="/profile/notif.user_id">{{ notif.username }}</a> <span class="font-weight-normal">followed you</span></h5>
+						<p class="card-text float-right d-inline">{{ notif.follow_date|date_format("short") }}</p>
+					{% endif %}
+				</div>
+			</div>
+        {% endfor %}
+    {% else %}
+		{{ macro.empty("there are no notifications here currently") }}
+	{% endif %}
+{% endblock %}

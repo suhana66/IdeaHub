@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Users
+{% endblock %}
+
+{% block main %}
+	{% if users|count != 0 %}
+		<h3 class="text-white mb-3">Users</h3>
+			<div class="container">
+				<div class="row">
+				{% for user in users %}
+					{% if loop.index % 4 == 0 %}</div><div class="row">{% endif %}
+					<div class="col-sm-4 px-1 pb-2">
+						<div class="card">
+							<div class="card-body">
+								<a class="h5 text-dark card-title font-weight-bold" href="/profile/{{ user.id }}">{{ user.username }}</a>
+								<p class="card-text mb-1"><span class="h6">Joined:-</span> {{ user.join_date|date_format }}</p>
+								<p class="card-text"><span class="h6">Number of posted ideas:-</span> {{ user.no_ideas }}</p>
+								{{ macro.follow(user.id, follows) }}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+	{% else %}
+		{{ macro.empty("there are no other users here currently", "sign in", "signin") }}
+	{% endif %}
+{% endblock %}

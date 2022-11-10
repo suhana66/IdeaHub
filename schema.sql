@@ -1,0 +1,46 @@
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id INTEGER UNIQUE,
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL,
+    hash  NUMERIC NOT NULL,
+    join_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS ideas;
+
+CREATE TABLE IF NOT EXISTS ideas (
+    id INTEGER UNIQUE,
+    user_id INTEGER NOT NULL,
+    idea_name TEXT NOT NULL,
+    idea_body TEXT NOT NULL,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    posted INTEGER DEFAULT 0,
+    post_date TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+DROP TABLE IF EXISTS likes;
+
+CREATE TABLE IF NOT EXISTS likes (
+    user_id INTEGER NOT NULL,
+    idea_id INTEGER NOT NULL,
+    like_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (idea_id) REFERENCES ideas(id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, idea_id)
+);
+
+DROP TABLE IF EXISTS follows;
+
+CREATE TABLE IF NOT EXISTS follows (
+    user_id INTEGER NOT NULL,
+    follow_id INTEGER NOT NULL,
+    follow_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (follow_id) REFERENCES users(id),
+    PRIMARY KEY (user_id, follow_id)
+);

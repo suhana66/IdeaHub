@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Error
+{% endblock %}
+
+{% block main %}
+    <div class="card col-sm-4 mx-auto">
+        <img class="card-img-top mt-3" src="/static/batman-says-no.gif" alt="Batman says no!">
+        <div class="card-body mx-auto text-center">
+            <h5 class="card-title"><u>{{ code }}</u> &#128529;</h5>
+            <p class="card-text">{{ message }}</p>
+            <button id="go-back" class="btn btn-primary">Go Back</button>
+        </div>
+    </div>
+{% endblock %}

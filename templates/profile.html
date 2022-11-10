@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	User Profile
+{% endblock %}
+
+{% block main %}
+	<div class="card bg-light">
+		<div class="card-body">
+			{% if profile.id != session.user_id %}
+				{{ macro.follow(profile.id, profile.followers|map(attribute="id"), "float-right", True) }}
+            {% endif %}
+			<h5 class="card-title font-weight-bold">{{ profile.username }}</h5>
+			<p class="card-text"><span class="h6">Joined:-</span> {{ profile.join_date|date_format }}</p>
+			{% for title, cont in {"Followers": profile.followers, "Following": profile.following}.items() %}
+				{% if cont %}
+					<p class="card-text" role="button" data-toggle="collapse" data-target="#{{ title }}" aria-expanded="false"><span class="h6">{{ title }}:-</span> {{ cont|count }}</p>
+					<ul class="collapse list-group mb-1" id="{{ title }}">
+						{% for row in cont %}
+							<li class="list-group-item mb-2 border"><a class="text-dark font-weight-bold" href="/profile/{{ row.id }}">{{ row.username }}</a></li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p class="card-text"><span class="h6">{{ title }}:-</span> 0</p>
+				{% endif %}
+			{% endfor %}
+			{% if profile.ideas %}
+				{% if profile.id != session.user_id %}
+					<p class="card-text" role="button" data-toggle="collapse" data-target="#ideas" aria-expanded="false"><span class="h6">Posted ideas:-</span> {{ profile.ideas|count }}</p>
+					<ul class="collapse list-group mb-3" id="ideas">
+						{% for i in range(profile.ideas|length) %}
+							<li class="list-group-item mb-2 border">
+								<h5 class="font-weight-bold" role="button" data-toggle="collapse" data-target="#idea-content-{{ i }}" aria-expanded="false">
+									{{ profile.ideas[i].idea_name }} <i class="fas fa-angle-down fa-lg float-right"></i>
+								</h5>
+								<div class="collapse" id="idea-content-{{ i }}">
+									<p class="mb-1">Posted:- {{ profile.ideas[i].post_date|date_format }}</h6>
+									<p class="card-text">{{ profile.ideas[i].idea_body }}</p>
+									{{ macro.like(profile.ideas[i].id, profile.ideas[i].id in profile.likes) }}
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<a class="card-text text-dark" href="/ideas"><span class="h6">Posted ideas:-</span> {{ profile.ideas|count }}</a>
+				{% endif %}
+			{% else %}
+				<p class="card-text"><span class="h6">Posted Ideas:-</span> 0</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

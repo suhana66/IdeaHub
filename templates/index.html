@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if search %}
+        Search Results
+    {% else %}
+        Homepage
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if ideas|count != 0 %}
+		<h3 class="text-white mb-3">{% if not search %}Homepage{% else %}Search Results{% endif %}</h3>
+		{% for i in range(ideas|length) %}
+			<div class="card bg-white mx-auto mb-2">
+				<div class="card-body">
+					<h5 class="card-title font-weight-bold d-block" role="button" data-toggle="collapse" data-target="#idea-content-{{ i }}" aria-expanded="false">{{ideas[i].idea_name }}<i class="fas fa-solid fa-angle-down float-right"></i></h5>
+					<div class="collapse" id="idea-content-{{ i }}">
+						<p class="card-text mb-2"><span class="h6">Posted:-</span> {{ ideas[i].post_date|date_format }}</p>
+						<p class="card-text mb-2"><span class="h6">Created By:-</span> <a class="text-dark" href="/profile/{{ ideas[i].user_id }}">{{ ideas[i].username }}</a></p>
+						<p class="card-text">{{ ideas[i].idea_body }}</p>
+						{% if session.user_id != ideas[i].user_id %}
+							{{ macro.like(ideas[i].id, ideas[i].liked) }}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% elif search %}
+		{{ macro.empty("there are no results for your search") }}
+	{% else %}
+		{{ macro.empty("there are no ideas posted here currently", "post some of your own", "ideas") }}
+	{% endif %}
+{% endblock %}

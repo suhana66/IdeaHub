@@ -1,0 +1,22 @@
+{% macro empty(msg, end="return to the homepage", link="") %}
+    {% with msg=msg, link=link, end=end %}
+    {% include 'empty.html' %}
+    {% endwith %}
+{% endmacro %}
+
+
+{% macro follow(user_id, follows, classes="", reverse = False) %}
+    {% set action = "un" if not reverse and user_id in follows or reverse and user_id not in follows else "" %}
+    {% set action = action + "follow" %}
+	<form action="/{{ action }}">
+		<button type="submit" class="btn btn-primary {{ classes }}" name="id" value="{{ user_id }}">{{ action|capitalize }} {% if action == "unfollow" %}&#128520;{% else %}&#127752;{% endif %}</button>
+	</form>
+{% endmacro %}
+
+
+{% macro like(idea_id, liked) %}
+    {% set action = "unlike" if liked else "like" %}
+    <form action="/{{ action }}">
+        <button type="submit" class="btn btn-info mr-2" name="id" value="{{ idea_id }}">{{ action|capitalize }} {% if not liked %}&#128155;{% else %}&#128420;{% endif %}</button>
+    </form>
+{% endmacro %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Create
+{% endblock %}
+
+{% block main %}
+    <div class="card bg-light mb-3">
+		<div class="card-body">
+			<h5 class="card-title font-weight-bold">The Idea &#128526;</h5>
+			<form method="post">
+				<div class="form-group">
+					<label class="h6" for="idea-name">Idea Name</label>
+					<textarea class="form-control" rows="1" name="idea-name"></textarea>
+				</div>
+				<div class="form-group">
+					<label class="h6" for="idea-body">Idea Body</label>
+					<textarea class="form-control" rows="6" name="idea-body"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary mt-3">Add</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
