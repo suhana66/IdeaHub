@@ -21,7 +21,7 @@ I undertook a personal challenge to style the application using only the Bootstr
 
 ## Installation
 
-Python3, which can be downloaded at this [link](https://www.python.org/downloads/) is required to run this application. All the modules required to run the application are included in the file [requirements.txt](https://github.com/Suhana66/Terminal-calculator/blob/master/requirements.txt). A virtual environment to run the application can be created using the following commands in the command line.
+Python3, which can be downloaded at this [link](https://www.python.org/downloads/) is required to run this application. All the modules required to run the application are included in the file [requirements.txt](https://github.com/Suhana66/IdeaHub/blob/master/requirements.txt). A virtual environment to run the application can be created using the following commands in the command line.
 
 ```bash
 python -m venv .venv
