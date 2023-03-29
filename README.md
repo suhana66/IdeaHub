@@ -1,5 +1,5 @@
 # IdeaHub
-Idea is a social media platform built using Flask, Jinja, SQLite, HTML, and Bootstrap. The platform allows users to create profiles, share posts, and interact with others through likes.
+IdeaHub is a social media platform built using Flask, Jinja, SQLite, HTML, and Bootstrap. The platform allows users to create profiles, share posts, and interact with others through likes.
 
 A more detailed description of what IdeaHub could be can be found in [info.txt](info.txt)
 
