@@ -3,8 +3,6 @@ IdeaHub is a social media platform built using Flask, Jinja, SQLite, HTML, and B
 
 A more detailed description of what IdeaHub could be can be found in [info.txt](info.txt)
 
-I undertook a personal challenge to style the application using only the Bootstrap CSS Framework and no additional CSS, when creating this project.
-
 ## Requirements
 Python, which can be downloaded at this [link](https://www.python.org/downloads/) is required to run this application. All the modules required to run the application are included in the file [requirements.txt](https://github.com/Suhana66/IdeaHub/blob/master/requirements.txt). A virtual environment to run the application can be created using the following commands in the command line.
 
