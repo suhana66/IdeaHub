@@ -39,7 +39,7 @@ def handle_exc(e):
 def custom_exc(error): return render_template("error.html", message=error, code=400)
 
 
-default_date = "%Y-%m-%d %H:%M"
+default_date = "%Y-%m-%d %H:%M:%S"
 
 @app.template_filter("date_format")
 def date_format(date_string, d_format="%B %d, %Y"):
@@ -79,6 +79,11 @@ def signin_required(f):
         if session.get("user_id") is None: return redirect("/signin")
         return f(*args, **kwargs)
     return decorated_function
+
+
+@app.route("/favicon.ico")
+def favicon():
+    return "", 200
 
 
 @app.route("/")
@@ -153,8 +158,7 @@ def create():
     if request.method == "POST":
         name = request.form.get("idea-name")
         body = request.form.get("idea-body")
-        if not name: return custom_exc("Idea Name", 1)
-        elif not body: return custom_exc("Idea Body", 1)
+        if not name: return custom_exc("Idea Name")
         query_db("INSERT INTO ideas (user_id, idea_name, idea_body) VALUES (?, ?, ?);", (session["user_id"], name.capitalize(), body.capitalize()))
         return redirect("/ideas")
     else: return render_template("create.html")
@@ -230,7 +234,7 @@ def profile(prof_id):
 @app.route("/notifications")
 @signin_required
 def notifications():
-    notifs = query_db("SELECT user_id, username, idea_name, like_date FROM users INNER JOIN likes ON likes.user_id = users.id INNER JOIN ideas ON likes.idea_id = ideas.id WHERE posted = 1 AND ideas.user_id = ?;", (session["user_id"], ))
-    notifs += query_db("SELECT user_id, username, follow_date FROM follows INNER JOIN users ON follows.user_id = users.id WHERE follow_id = ?;", (session["user_id"], ))
+    notifs = query_db("SELECT users.id AS user_id, users.username, ideas.idea_name, likes.like_date FROM users INNER JOIN likes ON likes.user_id = users.id INNER JOIN ideas ON likes.idea_id = ideas.id WHERE posted = 1 AND ideas.user_id = ?;", (session["user_id"], ))
+    notifs += query_db("SELECT users.id AS user_id, users.username, follows.follow_date FROM follows INNER JOIN users ON follows.user_id = users.id WHERE follow_id = ?;", (session["user_id"], ))
     notifs.sort(key=lambda notif: datetime.strptime(next(val for key, val in notif.items() if "date" in key), default_date), reverse=True)
     return render_template("notifications.html", notifs=notifs)

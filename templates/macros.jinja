@@ -1,4 +1,4 @@
-{% macro empty(msg, end="return to the homepage", link="") %}
+{% macro empty(msg, link, end="return to the homepage") %}
     {% with msg=msg, link=link, end=end %}
     {% include 'empty.html' %}
     {% endwith %}

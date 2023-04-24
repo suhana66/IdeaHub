@@ -29,6 +29,6 @@
 	{% elif search %}
 		{{ macro.empty("there are no results for your search") }}
 	{% else %}
-		{{ macro.empty("there are no ideas posted here currently", "post some of your own", "ideas") }}
+		{{ macro.empty("there are no ideas posted here currently", "ideas", "post some of your own") }}
 	{% endif %}
 {% endblock %}

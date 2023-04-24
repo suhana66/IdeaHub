@@ -21,7 +21,7 @@
                     </div>
                 {% endif %}
                 <div class="form-group d-flex align-items-center">
-                    <input id="pswrd" class="form-control mr-3" placeholder="Password" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$" title="Strong password with atleast 1 lowercase character, 1 uppercase character, 1 number and 8 total characters" required>
+                    <input id="pswrd" class="form-control mr-3" placeholder="Password" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$" title="Strong password with at least 1 lowercase character, 1 uppercase character, 1 number, and at least 8 total characters" required>
                     <i class="fas fa-solid fa-eye-slash"></i>
                 </div>
                 {% if verb == "up" %}

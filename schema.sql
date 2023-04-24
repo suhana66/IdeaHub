@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS ideas (
     id INTEGER UNIQUE,
     user_id INTEGER NOT NULL,
     idea_name TEXT NOT NULL,
-    idea_body TEXT NOT NULL,
+    idea_body TEXT,
     create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     posted INTEGER DEFAULT 0,
     post_date TIMESTAMP,
