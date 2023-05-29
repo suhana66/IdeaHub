@@ -22,10 +22,10 @@ IdeaHub includes the following features:
 * Search functionality
 
 ## Code Structure
-app.py: the main Flask application file
-schema.sql: SQL statements to create necessary tables for the application
-templates/: Jinja templates for the views
-static/: static files for the application, JavaScript files and GIFs
+* app.py: the main Flask application file
+* schema.sql: SQL statements to create necessary tables for the application
+* templates/: Jinja templates for the views
+* static/: static files for the application, JavaScript files and GIFs
 
 ## License
 The GIFs used in this application are in the public domain and can be found at the following links, [disney-aristocats.gif](http://gifgifs.com/creatures-cartoons/cartoon-characters/35107-disney-aristocats.html) and [batman-says-no.gif](http://gifgifs.com/creatures-cartoons/cartoon-characters/35099-batman-says-no.html).
