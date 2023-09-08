@@ -31,7 +31,6 @@ Session(app)
 
 @app.errorhandler(Exception)
 def handle_exc(e):
-    print(e)
     if not isinstance(e, HTTPException): e = InternalServerError()
     return render_template("error.html", message=e.name, code=e.code)
 
@@ -227,7 +226,6 @@ def profile(prof_id):
     profile["following"] = query_db("SELECT follow_id AS id, username FROM follows INNER JOIN users ON users.id = follows.follow_id WHERE user_id = ?;", (profile["id"], ))
     profile["ideas"] = query_db("SELECT id, idea_name, idea_body, post_date FROM ideas WHERE posted = 1 AND user_id = ?;", (profile["id"], ))
     profile["likes"] = [row["idea_id"] for row in query_db("SELECT idea_id FROM likes WHERE user_id = ?;", (session.get("user_id", 0), ))]
-    print(profile)
     return render_template("profile.html", profile=profile)
 
 
